@@ -125,7 +125,7 @@ class HomePage extends StatelessWidget {
           ),
         ),
         Image.asset(
-          'assets/images/ceu.jpg', // Asegúrate de tener la imagen en la carpeta assets
+          'assets/images/ceu.jpg', 
           width: 700,
           height: 200,
           fit: BoxFit.cover,
