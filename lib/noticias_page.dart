@@ -9,7 +9,7 @@ class NoticiasPage extends StatelessWidget {
       backgroundColor: const Color.fromARGB(255, 81, 11, 11), 
       appBar: AppBar(
         title: const Text('Noticias',),
-        backgroundColor: const Color.fromARGB(255, 81, 11, 11),
+        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
