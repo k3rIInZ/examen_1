@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'noticias_page.dart';
+import 'tasks_page.dart';
 
 void main() => runApp(const MyApp());
 
@@ -27,21 +29,11 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold, backgroundColor: Color.fromARGB(255, 243, 33, 33), color: Colors.white);
+
   static const List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Bienvenidos a Ceutec',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 1: Business',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 2: School',
-      style: optionStyle,
-    ),
+    HomePage(),
+    NoticiasPage(),
+    TasksPage(),
   ];
 
   void _onItemTapped(int index) {
@@ -54,7 +46,14 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: _selectedIndex == 0
+            ? const Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('CEUTEC'),
+                ],
+              )
+            : Text(widget.title),
         leading: Builder(
           builder: (context) {
             return IconButton(
@@ -70,11 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: _widgetOptions[_selectedIndex],
       ),
       drawer: Drawer(
-        // Add a ListView to the drawer. This ensures the user can scroll
-        // through the options in the drawer if there isn't enough vertical
-        // space to fit everything.
         child: ListView(
-          // Important: Remove any padding from the ListView.
           padding: EdgeInsets.zero,
           children: [
             const DrawerHeader(
@@ -87,9 +82,7 @@ class _MyHomePageState extends State<MyHomePage> {
               title: const Text('Home'),
               selected: _selectedIndex == 0,
               onTap: () {
-                // Update the state of the app
                 _onItemTapped(0);
-                // Then close the drawer
                 Navigator.pop(context);
               },
             ),
@@ -97,9 +90,7 @@ class _MyHomePageState extends State<MyHomePage> {
               title: const Text('Noticias'),
               selected: _selectedIndex == 1,
               onTap: () {
-                // Update the state of the app
                 _onItemTapped(1);
-                // Then close the drawer
                 Navigator.pop(context);
               },
             ),
@@ -107,15 +98,82 @@ class _MyHomePageState extends State<MyHomePage> {
               title: const Text('To do Tasks'),
               selected: _selectedIndex == 2,
               onTap: () {
-                // Update the state of the app
                 _onItemTapped(2);
-                // Then close the drawer
                 Navigator.pop(context);
               },
             ),
           ],
         ),
       ),
+    );
+  }
+}
+
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: <Widget>[
+        const Padding(
+          padding: EdgeInsets.all(16.0),
+          child: Text(
+            'Bienvenidos a Ceutec',
+            style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.white, backgroundColor: Colors.red),
+          ),
+        ),
+        Image.asset(
+          'assets/images/ceu.jpg', // Asegúrate de tener la imagen en la carpeta assets
+          width: 700,
+          height: 200,
+          fit: BoxFit.cover,
+        ),
+        const SizedBox(height: 16),
+        const Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Card(
+            child: Padding(
+              padding: EdgeInsets.all(16.0),
+              child: Column(
+                children: [
+                  Text(
+                    'Misión',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(height: 10),
+                  Text(
+                    'Formar profesionales íntegros y competentes mediante una modalidad educativa de calidad, innovadora y accesible, con uso intensivo de tecnología, que genere crecimiento personal para la transformación de la sociedad.',
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+        const Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Card(
+            child: Padding(
+              padding: EdgeInsets.all(16.0),
+              child: Column(
+                children: [
+                  Text(
+                    'Visión',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(height: 10),
+                  Text(
+                    'Ser una universidad referente a nivel internacional en la formación de profesionales íntegros, competentes y emprendedores, que contribuyan al desarrollo y transformación de la sociedad.',
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
